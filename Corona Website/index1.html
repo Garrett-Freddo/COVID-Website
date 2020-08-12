@@ -1,0 +1,131 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src = "database.js"></script>
+    
+    <script src="https://smtpjs.com/v3/smtp.js"></script> 
+    <script
+    src="https://code.jquery.com/jquery-1.12.4.min.js"
+    integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+    crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <title>Contact Tracing</title>
+    <style>
+        body{
+            margin: 30px;
+        }
+        .my-container{
+            border: 1px solid black;  
+        }
+        .my-row{
+            border: 1px solid red; 
+            height:400px;
+        }
+        .my-rowSubHeader{
+            border: 1px solid red; 
+            height: 200px;
+        }
+        .my-rowHeader{
+            border:1px solid red;
+            height: 100px;
+        }
+        .my-col{
+            border: 1px dotted blue;
+        }
+
+    </style>
+</head>
+
+<body>
+  <!---  $.backstretch("");  -->
+    <div class = "container my-container">
+        <div class = "row my-rowHeader">
+            <div class="col my-col">
+              <h1 class = "text-center">Covid Contact Tracer</h1>
+            </div>
+        </div>
+        <div class="row  align-items-top my-rowsubHeader">
+            <div class="col my-col">
+               <h4>This website functions as a COVID-19 social contact
+                   tracer. The site is designed to notify you when someone
+                   you have come into contact with falls ill. The goal of
+                   this website is to assist people with proper social
+                   distancing and contact tracing protocol.
+               </h4>
+            </div>
+        </div>
+
+<!-- Registration Section-->
+        <div class = "row align-items-top my-row">
+            <div class = "col-md-4 justify-content-center my-col">
+                <form class = "text-center">
+                <h2> Registration </h2>
+        <label for="fname">First name:</label><br>
+        <input type="text" id="fname" name="fname" placeholder="First name" value = "" ><br>
+        <label for="lname">Last name:</label><br>
+        <input type="text" id="lname" name="lname" placeholder = "Last Name" value = ""><br>
+        <label for="email">Email Address:</label><br>
+        <input type="text" id="email" name="email" placeholder = "Email Address"value = ""><br>
+        <button  type = "button" onclick = "addToList();"> Submit </button>
+        <button type = "button" onclick = "sendVerificationEmail(getInputValemail(), findCode(getInputValfName(), getInputValLName(), getInputValemail()));"> Send Verificaiton Email </button>
+            </div>
+           </form>
+
+
+<!--Verification Code   -->
+
+
+           <div class = "col-md-4 justify-content-center my-col">
+            <form class = "text-center">
+            <h2> Confirmation </h2>
+            <p class = "text-center"> Use this section to finish registering your account. Enter your name and email verification code then press submit.
+            </p>
+    <label for="fname">First name:</label><br>
+    <input type="text" id="fname" name="fname" placeholder="First name" value = "" ><br>
+    <label for="lname">Last name:</label><br>
+    <input type="text" id="lname" name="lname" placeholder = "Last Name" value = ""><br>
+    <label for="Verificaiton Code">Verificaiton Code:</label><br>
+    <input type="text" id="Verification Code" name="Verification Code" placeholder = "Verificaiton Code"value = ""><br>
+    <button type = "button">Submit</button> 
+    
+        </div>
+       </form>
+
+
+<!-- Contact Others Section-->
+
+
+            <div class="col-md-4 justify-content-center my-col">
+                <h4 class = "text-center">Contact Others</h4>
+                <p class = "text-center">If you have COVID-19 or believe you may have COVID-19 use this
+                    to notify people you have been in contact with.
+                </p>
+                <form class = "text-center">
+                    <label for = "fnameContact"> Contact first name</label><br>
+                      <input type = "text" id = "fnameContact" placeholder = "Contact First Name" value = ""><br>
+                      <label for = "lnameContact"> Contact last name</label><br>
+                      <input type = "text" id = "lnameContact" placeholder = "Contact Last Name" value = ""><br>
+                <button  type = "button" onclick = "searchForName();"> Submit </button>
+
+               <!--- <form method="post">
+                  <input type="button" value="Send Email" onclick="sendEmail();"/>
+              </form> --> 
+              </form>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    
+</body>
+</html>

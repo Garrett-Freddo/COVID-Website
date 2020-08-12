@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script
+    src="https://code.jquery.com/jquery-1.12.4.min.js"
+    integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+    crossorigin="anonymous"></script>
+
+    <script src="https://smtpjs.com/v3/smtp.js"></script>     
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+   
+    <title>Contact Tracing</title>
+    <style>
+      body, html {
+        height: 100%;
+      }
+      .bg {
+        /* The image used */
+        background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(20).jpg");
+
+        /* Full height */
+        height: 100%;
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+}
+
+      body{
+            margin: 30px;
+        }
+        .my-container{
+        /*    border: 1px solid black; */ 
+        }
+        .my-row{
+           /* border: 1px solid red; */
+        }
+        .my-rowSubHeader{
+         /*   border: 1px solid red; */
+            height: 100px;
+        }
+        .my-rowHeader{
+       /*     border:1px solid red;  */
+            height: 200px;
+        }
+        .my-col{
+        /*    border: 1px dotted blue; */
+        }
+        .header-row-size{
+          height: 150px;
+        }
+        .textField-row-size{
+          height: 200px;
+        }
+        .button-row-size{
+          height:50px;
+        }
+
+    </style>
+
+
+
+
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/7.15.5/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/7.15.5/firebase-auth.js"></script>
+    <script defer src="/__/firebase/7.15.5/firebase-firestore.js"></script>
+    <script defer src="/__/firebase/7.15.5/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/7.15.5/firebase-storage.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+    <script defer src = "userData.js"> </script>
+
+  </head>
+  <body>
+    <div class = "bg">
+
+        <!--    POPUP      -->
+    <!-- Modal -->
+<div class="modal fade" id="Code-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Check your Email for a verification code, then enter your name and code below:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        </div>
+        <label for="Vcode">Verification Code:</label><br>
+        <input type="text" id="Vcode" name="Vcode" placeholder="Verification Code" value = "" ><br>
+        <label for="VcodeFname">First Name:</label><br>
+        <input type="text" id="VcodeFname" name="VcodeFname" placeholder="First Name" value = "" ><br>
+        <label for="Vcode">Last Name:</label><br>
+        <input type="text" id="VcodeLname" name="VcodeLname" placeholder="Last Name" value = "" ><br>
+       
+        <div class="modal-footer">
+          <button type="button"  onclick="verifyCode(getInputValVcodeFname(), getInputValVcodeLname(), getInputValVcode());" class="btn btn-secondary" data-dismiss="modal">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+      <!---  $.backstretch("");  -->
+      <div class = "container my-container">
+        <div class = "row my-rowSubHeader align-items-center">
+            <div class="col my-col justify-content-center">
+              <h1 class = "text-center">Covid Contact Tracer</h1>
+            </div>
+        </div>
+        <div class="row  align-items-top my-rowHeader">
+            <div class="col my-col justify-content-center">
+              <form class = "text-center">
+               <h4>This website functions as a COVID-19 social contact
+                   tracer. The site is designed to notify you when someone
+                   you have come into contact with falls ill. The goal of
+                   this website is to assist people with proper social
+                   distancing and contact tracing protocol.
+               </h4>
+               </form>
+            </div>
+        </div>
+
+<!-- Registration Section-->
+
+
+<!-- First row, subheaders -->
+<div class = "row align-items-top my-row header-row-size">
+  <div class = "col-md-4 justify-content-center my-col">
+    <form class = "text-center">
+      <h2> Registration </h2>
+      <p class = "text-center"> Use this section to finish registering your account. Enter your name and email verification code then press submit.
+      </form>
+  </div>
+  <div class = "col-md-4 justify-content-center my-col">
+      <h2 class = "text-center"> Confirmation </h2>
+      <p class = "text-center"> Use this section to finish registering your account. Enter your name and email verification code then press submit.
+  </div>
+  <div class = "col-md-4 justify-content-center my-col">
+    <h2 class = "text-center">Contact Others</h4>
+      <p class = "text-center">If you have COVID-19 or believe you may have COVID-19 use this
+        to notify people you have been in contact with.
+    </p>
+  </div>
+</div> 
+
+
+<!--  Second row, text fields -->
+<div class = "row align-items-top ">
+  <div class = "col-md-4 justify-content-center my-col textField-row-size">
+    <form class = "text-center">
+      <label for="fname">First name:</label><br>
+      <input type="text" id="fname" name="fname" placeholder="First name" value = "" ><br>
+      <label for="lname">Last name:</label><br>
+      <input type="text" id="lname" name="lname" placeholder = "Last Name" value = ""><br>
+      <label for="email">Email Address:</label><br>
+      <input type="text" id="email" name="email" placeholder = "Email Address"value = ""><br>
+
+    </form>
+  </div>
+  <div class = "col-md-4 justify-content-center my-col">
+    <form class = "text-center">
+      <label for="fname">First name:</label><br>
+    <input type="text" id="fname" name="fname" placeholder="First name" value = "" ><br>
+    <label for="lname">Last name:</label><br>
+    <input type="text" id="lname" name="lname" placeholder = "Last Name" value = ""><br>
+    <label for="Verificaiton Code">Verificaiton Code:</label><br>
+    <input type="text" id="Verification Code" name="Verification Code" placeholder = "Verificaiton Code"value = ""><br>
+
+    </form>
+  </div>
+
+  <div class = "col-md-4 justify-content-center my-col">
+    <form class = "text-center">
+      <label for = "fnameContact"> Contact first name</label><br>
+        <input type = "text" id = "fnameContact" placeholder = "Contact First Name" value = ""><br>
+        <label for = "lnameContact"> Contact last name</label><br>
+        <input type = "text" id = "lnameContact" placeholder = "Contact Last Name" value = ""><br>
+        <label for = "optionalMessage">Optional Message</label><br>
+        <input type = "text" id = "optionalMessage" placeholder = "Optional Message" value = ""><br>
+      
+    </form>
+  </div>
+</div>
+
+
+<!-- Third row, buttons   -->
+<div class = "row align-items-center my-row button-row-size">
+  <div class = "col-md-4 justify-content-center my-col">
+    <form class = "text-center">
+      <button  type = "button" onclick = "addToList(); addDataToFirestore(getInputValfName(), getInputValLName(), getInputValemail());"> Submit </button>
+      <button type = "button"  data-toggle = "modal" data-target="#Code-Modal" onclick = "searchByNameThenVerificationEmail(getInputValfName(), getInputValLName());"> Send Verificaiton Email </button>
+
+    </form>
+  </div>
+  <div class = "col-md-4 justify-content-center my-col">
+    <form class = "text-center">
+    <button type = "button">Submit</button> 
+    </form>
+  </div>
+
+  <div class = "col-md-4 justify-content-center my-col">
+    <form class = "text-center">
+      
+                <button  type = "button" onclick = "searchByNameThenEmail(getContactValfName(),getContactValLName());"> Submit </button>
+      
+    </form>
+  </div>
+</div>
+
+
+
+<!--
+
+
+
+        <div class = "row align-items-top my-row">
+            <div class = "col-md-4 justify-content-center my-col">
+                <form class = "text-center">
+                <h2> Registration </h2>
+        <label for="fname">First name:</label><br>
+        <input type="text" id="fname" name="fname" placeholder="First name" value = "" ><br>
+        <label for="lname">Last name:</label><br>
+        <input type="text" id="lname" name="lname" placeholder = "Last Name" value = ""><br>
+        <label for="email">Email Address:</label><br>
+        <input type="text" id="email" name="email" placeholder = "Email Address"value = ""><br>
+        <button  type = "button" onclick = "addToList(); addDataToFirestore(getInputValfName(), getInputValLName(), getInputValemail());"> Submit </button>
+        <button type = "button"  data-toggle = "modal" data-target="#Code-Modal" onclick = "sendVerificationEmail(getInputValemail(), findCode(getInputValfName(), getInputValLName(), getInputValemail()));"> Send Verificaiton Email </button>
+            </div>
+           </form>
+
+          -->
+<!--Verification Code   -->
+<!---
+
+           <div class = "col-md-4 justify-content-center my-col">
+            <form class = "text-center">
+            <h2> Confirmation </h2>
+            <p class = "text-center"> Use this section to finish registering your account. Enter your name and email verification code then press submit.
+            </p>
+    <label for="fname">First name:</label><br>
+    <input type="text" id="fname" name="fname" placeholder="First name" value = "" ><br>
+    <label for="lname">Last name:</label><br>
+    <input type="text" id="lname" name="lname" placeholder = "Last Name" value = ""><br>
+    <label for="Verificaiton Code">Verificaiton Code:</label><br>
+    <input type="text" id="Verification Code" name="Verification Code" placeholder = "Verificaiton Code"value = ""><br>
+    <button type = "button">Submit</button> 
+    
+        </div>
+       </form>
+
+      -->
+<!-- Contact Others Section-->
+<!--
+
+            <div class="col-md-4 justify-content-center my-col">
+                <h4 class = "text-center">Contact Others</h4>
+                <p class = "text-center">If you have COVID-19 or believe you may have COVID-19 use this
+                    to notify people you have been in contact with.
+                </p>
+                <form class = "text-center">
+                    <label for = "fnameContact"> Contact first name</label><br>
+                      <input type = "text" id = "fnameContact" placeholder = "Contact First Name" value = ""><br>
+                      <label for = "lnameContact"> Contact last name</label><br>
+                      <input type = "text" id = "lnameContact" placeholder = "Contact Last Name" value = ""><br>
+                <button  type = "button" onclick = "searchByNameThenEmail(getContactValfName(),getContactValLName());"> Submit </button>
+                -->
+               <!--- <form method="post">
+                  <input type="button" value="Send Email" onclick="sendEmail();"/>
+              </form> --> 
+
+              <!---
+              </form>
+
+
+            </div>
+        </div>
+
+
+
+  -->
+  </div>
+  </div>
+  </body>
+</html>
